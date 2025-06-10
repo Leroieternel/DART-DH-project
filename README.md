@@ -1,5 +1,5 @@
 # DartControl
-## A Diffusion-Based Autoregressive Motion Model for Real-Time Text-Driven Motion Control (ICLR 2025, Spotlight)
+## VolA Diffusion-Based Autoregressive Motion Model for Real-Time Text-Driven Motion Control (ICLR 2025, Spotlight)
 
 ### [[website](https://zkf1997.github.io/DART/)] | [[paper](https://arxiv.org/abs/2410.05260)] 
 
@@ -240,49 +240,6 @@ You may also tune the optimization parameters to modulate the generation, such a
 
 [//]: # (## Sparse and Dense Joint locations Control)
 
-## Text-Conditioned Goal Reaching using Motion Control Policy
-We train a motion control policy capable of reaching dynamic goal locations by leveraging locomotion skills specified through text prompts. The motion control policy is trained for three kinds of locomotion: walking, running, and hopping on the left leg. The control policy can generate >300 frames per second.
-we demonstrate how to define a sequence of waypoints to be reached in the [cfg files](./data/test_locomotion).
-You can run the following command to generate example motions of walking to a sequence of goals:
-```
-source ./demos/goal_reach.sh
-```
-The results can be visualized as follows:
-```
-python -m visualize.vis_seq --add_floor 1 --seq_path './policy_train/reach_location_mld/fixtext_repeat_floor100_hop10_skate100/env_test/demo_walk_path0/0.pkl' 
-```
-
-## Sparse and Dense Joint Trajectory Control
-We provide a script to generate motions with **sparse/dense joint trajectory control**.
-Below we demonstrate some examples of controlling hand wrists and 2D pelvis trajectories.
-This script assumes starting from a **standing pose** and the specified joint trajectory needs to be feasible with the starting pose.
-To accommodate this, we set a tolerance period (1.5 seconds in the script) at the start of the sequence. During this period, no trajectory constraints are enforced, allowing sufficient time for the human to transition smoothly and feasibly to the controlled trajectory from the standing pose.
-You can run the following command to generate example motions:
-```
-source ./demos/traj.sh
-```
-The generated sequences can be visualized using the four commands below. 
-The trajectories are visualized as a sequence of spheres, with colors transitioning from dark to red to represent relative time.
-    
-- In the punch example, there is a single trajectory point at 1.5 seconds.
-    
-- In the other three examples, trajectory points are distributed across a range from 1.5 to 6 seconds.
-
-You can find the utility script for creating the example control trajectories [here](./data_scripts/export_traj.py).This script includes definitions for: frame index and location for each control trajectory point, and index of the joint to be controlled.
-```
-python -m visualize.vis_seq --add_floor 1 --translate_body 1 --vis_joint 1 --seq_path './data/traj_test/dense_frame180_walk_circle/mld_optim_global/floor1.0_skate1.0_jerk0.0_use_pred_joints_init1.0_ddim10_guidance5.0_seed0_lr0.05_steps100/*.pkl'
-```
-```
-python -m visualize.vis_seq --add_floor 1 --translate_body 1 --vis_joint 1 --seq_path './data/traj_test/sparse_frame180_walk_square/mld_optim_global/floor1.0_skate1.0_jerk0.0_use_pred_joints_init1.0_ddim10_guidance5.0_seed0_lr0.05_steps100/*.pkl'
-```
-```
-python -m visualize.vis_seq --add_floor 1 --translate_body 1 --vis_joint 1 --seq_path './data/traj_test/dense_frame180_wave_right_hand_circle/mld_optim_global/floor1.0_skate1.0_jerk0.0_use_pred_joints_init1.0_ddim10_guidance5.0_seed0_lr0.05_steps100/*.pkl'
-```
-```
-python -m visualize.vis_seq --add_floor 1 --translate_body 1 --vis_joint 1 --seq_path './data/traj_test/sparse_punch/mld_optim_global/floor1.0_skate1.0_jerk0.0_use_pred_joints_init1.0_ddim10_guidance5.0_seed0_lr0.05_steps100/*.pkl'
-```
-You can test with custom trajectories by setting `--input_path` to your custom control trajectories.
-If you have ground truth initial bodies and joint trajectories from dataset, you can modify the script to use initial bodies from dataset instead of the rest standing pose similar to the [inbetweening script](./mld/optim_mld.py).
 
 # Training
 
@@ -441,17 +398,6 @@ source ./evaluation/eval_gen_composition.sh
 - The evaluation results of FlowMDM will be saved at `./FlowMDM/results/babel/FlowMDM/evaluations_summary/001300000_fast_10_transLen30babel_random_seed0.json`.
 - The evaluation results of DART will be saved at `./FlowMDM/results/babel/Motion_FlowMDM_001300000_gscale1.5_fastbabel_random_seed0_s10/mld_fps_clip_repeat_euler_checkpoint_300000_guidance5.0_seed0/evaluations_summary/fast_10_transLen30babel_random_seed0.json`.
 
-## Text-Conditioned Motion In-betweening
-The generation and evaluation can be executed with the command below. The results will be displayed in the command line, and the file save path will also be indicated there.
-```
-source ./evaluation/eval_gen_inbetween.sh
-```
-
-
-## Text-Conditioned Goal Reaching
-The generation and evaluation can be executed with the command below. The results will be displayed in the command line, and the file save path will also be indicated there.
-```
-source ./evaluation/eval_gen_goal_reach.sh
 ```
 
 # Acknowledgements
@@ -472,16 +418,7 @@ Our code is built upon many prior projects, including but not limited to:
 [//]: # (    * Blender and its SMPL-X add-on employ their respective license.)
 
   
-# Citation
-```
-@inproceedings{Zhao:DartControl:2025,
-   title = {{DartControl}: A Diffusion-Based Autoregressive Motion Model for Real-Time Text-Driven Motion Control},
-   author = {Zhao, Kaifeng and Li, Gen and Tang, Siyu},
-   booktitle = {The Thirteenth International Conference on Learning Representations (ICLR)},
-   year = {2025}
-}
-```
 
 # Contact
 
-If you run into any problems or have any questions, feel free to contact [Kaifeng Zhao](mailto:kaifeng.zhao@inf.ethz.ch) or create an issue.
+If you run into any problems or have any questions, feel free to contact [Xiangyi Jia](mailto:jiaxia@student.ethz.ch) or create an issue.
