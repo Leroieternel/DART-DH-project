@@ -123,10 +123,11 @@ Our experiments and performance profiling are conducted on based on two setups: 
 
   </details>
 
-## Egobody Scene Mesh
+# Egobody Scene Mesh
 * Please download this [google drive link](https://drive.google.com/drive/folders/1vJg3GFVPT6kr6cA0HrQGmiAEBE2dkaps?usp=drive_link) containing the EgoBody scene mesh in .obj format, then extract and merge it to the project folder `./DART/scene_mesh`.
 
-## Scene Mesh Pre-processing
+# Scene Mesh Pre-processing
+## Scene mesh compressing
 If the original scene with floor mesh is too big, we provide a script that can effectively compress the scene mesh using quadratic decimation. For running the script, please use
 ```
 python compress_scene.py
