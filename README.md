@@ -6,7 +6,6 @@
 
 https://github.com/user-attachments/assets/b26e95e7-4af0-4548-bdca-8f361594951c
 
-
 # Getting Started
 
 ## Environment Setup
@@ -135,7 +134,8 @@ GPU, intel i7-13700K CPU, 64GiB memory. The workstation runs with Ubuntu 22.04.4
 
 
 ## Human-Scene Interaction Synthesis
-We provide a script to generate human-scene interaction motions.
+We provide multiple optimizer scripts for different tasks.
+
 Given an input 3D scene and the text prompts specifying the actions and durations, we control the human to reach the goal joint location starting from an initial pose while adhering to the scene contact and collision constraints.
 We show two examples of climbing downstairs and sitting to a chair in the demo below:
 ```
@@ -148,6 +148,24 @@ python -m visualize.vis_seq --add_floor 0 --seq_path './mld_denoiser/mld_fps_cli
 ```
 python -m visualize.vis_seq --add_floor 0 --seq_path './mld_denoiser/mld_fps_clip_repeat_euler/checkpoint_300000/optim/climb_down_use_pred_joints_ddim10_guidance5.0_seed0_contact0.1_thresh0.0_collision0.1_jerk0.1/sample_*.pkl'
 ```
+
+If you would like to use a Egobody scene, run the demo
+```
+source ./demos/egobody_scene.sh
+```
+
+Finally, to try out the high five optimizer, utilize the following demo.
+```
+source ./demos/run_high_five.sh
+```
+
+
+Our ball interaction optimizer can be run with
+```
+source ./demos/run_high_five.sh
+```
+
+The respective python files, used for improving upon DART's original optimizer can be found in the folder `mld` as the files `optim_scene_mld.py`, `optim_scene_mld_ball_dart.py`, `optim_scene_mld_dart_final.py` and `optim_scene_mld_volsmpl_ball.py`
 
 To use a custom 3D scene, you need to first calculate the scene SDF for evaluating human-scene collision and contact constraints.
 Please ensure the 3D scene is z-up and the floor plane has zero height.
