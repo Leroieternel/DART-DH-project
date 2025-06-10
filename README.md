@@ -131,7 +131,7 @@ If the original scene with floor mesh is too big, we provide a script that can e
 ```
 python compress_scene.py
 ```
-## Calculate scene sdf
+# Calculate scene sdf
 We provide a script (adapted from the original dart) that can compute the scene sdf for the previous compressed scene with floor. For running the script, please use
 ```
 python generate_sdf.py
