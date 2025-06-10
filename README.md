@@ -1,7 +1,7 @@
 # Synthesizing Interactive Human Behaviors
 ## VolDART: DART with VolumetricSMPL Collision Optimizer
 
-### [[website](https://zkf1997.github.io/DART/)] | [[paper](https://arxiv.org/abs/2410.05260)] 
+### [[website]([https://zkf1997.github.io/DART/](https://voldart-dh.github.io/))]
 
 
 https://github.com/user-attachments/assets/b26e95e7-4af0-4548-bdca-8f361594951c
@@ -16,8 +16,7 @@ conda activate DART
 ```
 Tested system:
 
-Our experiments and performance profiling are conducted on a workstation with single RTX 4090
-GPU, intel i7-13700K CPU, 64GiB memory. The workstation runs with Ubuntu 22.04.4 LTS system.
+Our experiments and performance profiling are conducted on based on two setups: the first one is a single RTX 4090 with 24 GiB memory, the second one is a single RTX 5070 with 16 GiB memory.
 
 ## Data and Model Checkpoints
 * Please download this [google drive link](https://drive.google.com/drive/folders/1vJg3GFVPT6kr6cA0HrQGmiAEBE2dkaps?usp=drive_link) containing model checkpoints and necessary data, extract and merge it to the project folder.
