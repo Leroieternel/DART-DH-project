@@ -180,7 +180,9 @@ The respective python files, used for improving upon DART's original optimizer c
 
 To use a custom 3D scene, you need to first calculate the scene SDF for evaluating human-scene collision and contact constraints.
 Please ensure the 3D scene is z-up and the floor plane has zero height.
-We use [mesh2sdf](https://github.com/wang-ps/mesh2sdf) for SDF calculation, as shown in [this script](./scenes/test_sdf.py).
+Please consult section `Scene Mesh Pre-processing` for more details.
+
+
 Example configuration files for an interaction sequence can be found [here](./data/optim_interaction). We currently initialize the human using a standing pose, with its location and orientation determined by the pelvis, left hip and right hip location specified using `init_joints`.
 The goal joint locations are specified using `goal_joints`. The current [script](./mld/optim_scene_mld.py) only use pelvis as the goal joint, you can modify the goal joints to be another joint or multiple joints.
 You may also tune the optimization parameters to modulate the generation, such as increasing the learning rate to obtain more diverse results, adjusting number of optimization steps to balance quality and speed, and adjusting the loss weights. 
