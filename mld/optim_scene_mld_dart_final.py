@@ -13,7 +13,6 @@ import torch.nn as nn
 import torch.optim as optim
 import tyro
 import yaml
-
 from torch.distributions.normal import Normal
 from torch.utils.tensorboard import SummaryWriter
 from pathlib import Path
@@ -433,15 +432,20 @@ def optimize(history_motion_tensor, transf_rotmat, transf_transl, text_prompt, g
         loss_collision = 0
         collision_count = 0
         total_collision_checks = 0
-        collision_vertices = 0
-        average_collision_vertices = 0
+        num_collision_vertices = 0
         
         # Create/get SMPL model (create only once)
         if 'model' not in scene_assets:
             model = smplx.create(model_path="./data/smplx_lockedhead_20230207/models_lockedhead/smplx/SMPLX_NEUTRAL.npz", 
                                gender='neutral', use_pca=True, num_pca_comps=12, num_betas=10, batch_size=1).to(device)
             scene_assets['model'] = attach_volume(model, pretrained=True, device=device)
-        
+         
+        # 使用scene sdf计算实际的loss_collision
+        joints_sdf = calc_point_sdf(scene_assets, global_joints.reshape(1, -1, 3)).reshape(B, T, 22)
+        negative_sdf_per_frame = (joints_sdf - joint_skin_dist.reshape(1, 1, 22)).clamp(max=0).sum(dim=-1)  # [B, T]
+        negative_sdf_mean = negative_sdf_per_frame.mean()
+        loss_collision = -negative_sdf_mean  # 这是实际使用的loss
+         
         for frame_idx in frame_indices:
             if frame_idx >= T:
                 continue
@@ -457,9 +461,6 @@ def optimize(history_motion_tensor, transf_rotmat, transf_transl, text_prompt, g
             # Process each batch separately (key fix)
             for batch_idx in range(B):
                 total_collision_checks += 1
-                # print('motion_sequences["transl"] shape: ', motion_sequences["transl"].shape)  # torch.Size([1, 130, 3])
-                # print('motion_sequences["global_orient"] shape: ', motion_sequences["global_orient"].shape)  # torch.Size([1, 130, 3, 3])
-                # print('motion_sequences["body_pose"] shape: ', motion_sequences["body_pose"].shape)  # torch.Size([1, 130, 21, 3, 3])
                 
                 # Get parameters for single batch
                 batch_transl = motion_sequences["transl"][batch_idx:batch_idx+1, frame_idx, :].reshape(1, 3)
@@ -484,11 +485,11 @@ def optimize(history_motion_tensor, transf_rotmat, transf_transl, text_prompt, g
                     return_verts=True, return_full_pose=True)
                 
                 # Detect collision
-                loss, collision_mask = scene_assets['model'].volume.collision_loss(
+                volumetric_loss, collision_mask = scene_assets['model'].volume.collision_loss(
                     filtered_scene_points, smpl_output, ret_collision_mask=True)
                 
-                if loss > 0:
-                    frame_collision_loss += loss
+                if volumetric_loss > 0:
+                    # frame_collision_loss += loss
                     frame_collision_count += 1
                     collision_count += 1
                     
@@ -502,7 +503,7 @@ def optimize(history_motion_tensor, transf_rotmat, transf_transl, text_prompt, g
                         
                         if collision_info:
                             print(f"    [DEBUG] Frame {frame_idx}: Processing ")
-                            print(f"      [COLLISION] Batch {batch_idx}: Loss {loss.item():.6f}")
+                            print(f"      [COLLISION] Batch {batch_idx}: VolumetricSMPL Loss {volumetric_loss.item():.6f}")
                             print(f"        Body part: {collision_info['location']}")
                             print(f"        Collision vertices: {collision_info['num_vertices']}")
                             print(f"        Relative height: {collision_info['height_absolute']:.3f}m (ratio: {collision_info['height_ratio']:.2f})")
@@ -510,11 +511,11 @@ def optimize(history_motion_tensor, transf_rotmat, transf_transl, text_prompt, g
                             print(f"        Body position: {batch_transl[0].detach().cpu().numpy()}")
                             print(f"        Scene points: {filtered_scene_points.shape[1]}")
                             frame_collision_vertices = collision_info['num_vertices']
-                            collision_vertices += frame_collision_vertices
+                            num_collision_vertices += frame_collision_vertices
             
                 
                 # Clean up memory
-                del loss
+                del volumetric_loss  
                 del smpl_output
                 if torch.cuda.is_available():
                     torch.cuda.empty_cache()
@@ -540,15 +541,16 @@ def optimize(history_motion_tensor, transf_rotmat, transf_transl, text_prompt, g
         if optim_args.optim_unit_grad:
             noise.grad.data /= noise.grad.norm(p=2, dim=reduction_dims, keepdim=True).clamp(min=1e-6)
         optimizer.step()
+        
         if i >= 99:
             print(f'  [SUMMARY] Step {i+1}/{optim_steps}:')
             print(f'    Total loss: {loss.item():.6f}')
             print(f'    Joint loss: {loss_joints.item():.6f}')
-            print(f'    Collision loss: {loss_collision.item() if hasattr(loss_collision, "item") else loss_collision:.6f} (weight: {optim_args.weight_collision})')
-            print(f'    Collision detection: {collision_count}/{total_collision_checks} (collisions detected/total checks)')
+            print(f'    Collision loss (SDF): {loss_collision.item():.6f} (weight: {optim_args.weight_collision})')
+            print(f'    VolumetricSMPL detection: {collision_count}/{total_collision_checks} (for debug only)')
             print(f'    Motion smoothness: {loss_jerk.item():.6f} (weight: {optim_args.weight_jerk})')
             print(f'    Ground contact: {loss_floor_contact.item():.6f} (weight: {optim_args.weight_contact})')
-            print(f'    Collision vertices: {collision_vertices}/{total_collision_checks} (collision vertices detected/total checks)')
+            print(f'    Collision vertices: {num_collision_vertices}/{total_collision_checks} (collision vertices detected/total checks)')
 
     for key in motion_sequences:
         if torch.is_tensor(motion_sequences[key]):

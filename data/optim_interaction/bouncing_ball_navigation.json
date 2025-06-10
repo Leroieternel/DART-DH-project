@@ -1,0 +1,34 @@
+{
+  "scene_dir": "/home/user/Desktop/DART/egobody_mesh/processed_mesh/",
+  "floor_height": 0.0,
+  "interaction_name": "bounce_ball",
+  "interactions": [
+    {
+      "text_prompt": "dribble the ball*15",
+      "init_joints": [
+        [
+          0.6,
+          -0.15,
+          1.1
+        ],
+        [
+          0.7,
+          -0.15,
+          1.02
+        ],
+        [
+          0.5,
+          -0.15,
+          1.00
+        ]
+      ],
+      "goal_joints": [
+        [
+          0.6,
+          -0.15,
+          1.1
+        ]
+      ]
+    }
+  ]
+}

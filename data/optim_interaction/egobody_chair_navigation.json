@@ -1,0 +1,34 @@
+{
+  "scene_dir": "/home/user/Desktop/DART/egobody_mesh/processed_mesh/",
+  "floor_height": 0.0,
+  "interaction_name": "egobody_navigation",
+  "interactions": [
+    {
+      "text_prompt": "turn around*3,walk*3,turn right*2,sit on chair*3",
+      "init_joints": [
+        [
+          -2.877,
+          0.3254,
+          1.1
+        ],
+        [
+          -2.777,
+          0.3254,
+          1.02
+        ],
+        [
+          -2.977,
+          0.3254,
+          1.00
+        ]
+      ],
+      "goal_joints": [
+        [
+          -1.563,
+          0.1934,
+          0.4541
+        ]
+      ]
+    }
+  ]
+}
