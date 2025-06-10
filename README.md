@@ -1,7 +1,7 @@
 # Synthesizing Interactive Human Behaviors
 ## VolDART: DART with VolumetricSMPL Collision Optimizer
 
-### [[website](https://zkf1997.github.io/DART/)]
+### [[website](https://voldart-dh.github.io/)]
 
 
 https://github.com/user-attachments/assets/b26e95e7-4af0-4548-bdca-8f361594951c
