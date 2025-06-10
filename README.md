@@ -127,6 +127,11 @@ Our experiments and performance profiling are conducted on based on two setups: 
 * Please download this [google drive link](https://drive.google.com/drive/folders/1vJg3GFVPT6kr6cA0HrQGmiAEBE2dkaps?usp=drive_link) containing the EgoBody scene mesh in .obj format, then extract and merge it to the project folder `./DART/scene_mesh`.
 
 # Scene Mesh Pre-processing
+## Generate Scene with Floor Mesh
+We provide a script to generate the scene with floor mesh. The input is z-up scene mesh, and the output is scene mesh with floor added. For running the script, please use
+```
+python generate_scene_with_floor.py
+```
 ## Scene mesh compressing
 If the original scene with floor mesh is too big, we provide a script that can effectively compress the scene mesh using quadratic decimation. For running the script, please use
 ```
