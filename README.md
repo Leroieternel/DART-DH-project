@@ -144,7 +144,7 @@ python generate_sdf.py
 ```
 
 
-## Human-Scene Interaction Synthesis
+# Human-Scene Interaction Synthesis
 We provide multiple optimizer scripts for different tasks.
 
 Given an input 3D scene and the text prompts specifying the actions and durations, we control the human to reach the goal joint location starting from an initial pose while adhering to the scene contact and collision constraints.
@@ -176,7 +176,7 @@ Our ball interaction optimizer can be run with
 python -m mld.optim_scene_mld_ball_dart --denoiser_checkpoint './mld_denoiser/mld_fps_clip_repeat_euler/checkpoint_300000.pt' --interaction_cfg "data/optim_interaction/bouncing_ball_navigation.json" --optim_lr 0.01 --optim_steps 100 --batch_size 1 --guidance_param 5 --respacing "ddim10" --export_smpl 1  --use_predicted_joints 1  --optim_unit_grad 1  --optim_anneal_lr 1  --weight_jerk 0.1 --weight_collision 0.1  --weight_contact 0.1  --weight_skate 0.0  --contact_thresh 0.00  --load_cache 0  --init_noise_scale 0.1
 ```
 
-The respective python files, used for improving upon DART's original optimizer can be found in the folder `mld` as the files `optim_scene_mld.py`, `optim_scene_mld_ball_dart.py`, `optim_scene_mld_dart_final.py` and `optim_scene_mld_volsmpl_ball.py`
+The respective python files, used for improving upon DART's original optimizer can be found in the folder `mld` as the files `optim_scene_mld.py`, `optim_scene_mld_ball_dart.py`, `optim_scene_mld_dart_final.py` and `optim_scene_mld_volsmpl_ball.py`, where `optim_scene_mld.py` is our VolumetricSMPL-based collision loss  implementation.
 
 To use a custom 3D scene, you need to first calculate the scene SDF for evaluating human-scene collision and contact constraints.
 Please ensure the 3D scene is z-up and the floor plane has zero height.
