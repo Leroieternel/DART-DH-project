@@ -194,7 +194,7 @@ You may also tune the optimization parameters to modulate the generation, such a
 # Acknowledgements
 Our code is built upon many prior projects, including but not limited to:
 
-[DNO](https://github.com/korrawe/Diffusion-Noise-Optimization), [MDM](https://github.com/GuyTevet/motion-diffusion-model), [MLD](https://github.com/ChenFengYe/motion-latent-diffusion), [FlowMDM](https://github.com/BarqueroGerman/FlowMDM), [text-to-motion](https://github.com/EricGuo5513/text-to-motion), [guided-diffusion](https://github.com/openai/guided-diffusion), [ACTOR](https://github.com/Mathux/ACTOR), [DIMOS](https://github.com/zkf1997/DIMOS)
+[DNO](https://github.com/korrawe/Diffusion-Noise-Optimization), [MDM](https://github.com/GuyTevet/motion-diffusion-model), [MLD](https://github.com/ChenFengYe/motion-latent-diffusion), [FlowMDM](https://github.com/BarqueroGerman/FlowMDM), [text-to-motion](https://github.com/EricGuo5513/text-to-motion), [guided-diffusion](https://github.com/openai/guided-diffusion), [ACTOR](https://github.com/Mathux/ACTOR), [DIMOS](https://github.com/zkf1997/DIMOS), [DART](https://github.com/zkf1997/DART)
 
 [//]: # (# License)
 
