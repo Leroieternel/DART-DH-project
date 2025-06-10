@@ -108,7 +108,7 @@ GPU, intel i7-13700K CPU, 64GiB memory. The workstation runs with Ubuntu 22.04.4
     </details>
 
 ## Egobody Scene Mesh
-* Please download this [google drive link](https://drive.google.com/drive/folders/1vJg3GFVPT6kr6cA0HrQGmiAEBE2dkaps?usp=drive_link) containing the EgoBody scene mesh in .obj format, then extract and merge it to the project folder ./DART/scene_mesh.
+* Please download this [google drive link](https://drive.google.com/drive/folders/1vJg3GFVPT6kr6cA0HrQGmiAEBE2dkaps?usp=drive_link) containing the EgoBody scene mesh in .obj format, then extract and merge it to the project folder `./DART/scene_mesh`.
 
 
 ## Visualization 
