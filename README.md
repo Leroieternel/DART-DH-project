@@ -127,7 +127,10 @@ Our experiments and performance profiling are conducted on based on two setups: 
 * Please download this [google drive link](https://drive.google.com/drive/folders/1vJg3GFVPT6kr6cA0HrQGmiAEBE2dkaps?usp=drive_link) containing the EgoBody scene mesh in .obj format, then extract and merge it to the project folder `./DART/scene_mesh`.
 
 ## Scene Mesh Pre-processing
-
+If the original scene mesh is too big, we provide a script that can effectively compress the scene mesh using quadratic decimation. For running the script, please use
+```
+python compress_scene.py
+```
 
 
 ## Human-Scene Interaction Synthesis
