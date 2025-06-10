@@ -1,19 +1,11 @@
-# DartControl
-## VolA Diffusion-Based Autoregressive Motion Model for Real-Time Text-Driven Motion Control (ICLR 2025, Spotlight)
+# Synthesizing Interactive Human Behaviors
+## VolDART: DART with VolumetricSMPL Collision Optimizer
 
 ### [[website](https://zkf1997.github.io/DART/)] | [[paper](https://arxiv.org/abs/2410.05260)] 
 
 
 https://github.com/user-attachments/assets/b26e95e7-4af0-4548-bdca-8f361594951c
 
-
-
-# Updates
-This repository is under construction and the documentations for the following for will be updated. If you encounter any problems, please do not hesitate to contact us.
-
-- [x] Setup, generation demos, and visualization
-- [x] Data preparation and training
-- [x] Evaluation
 
 # Getting Started
 
@@ -114,6 +106,10 @@ GPU, intel i7-13700K CPU, 64GiB memory. The workstation runs with Ubuntu 22.04.4
       │   │   └── index.csv
     ```
     </details>
+
+## Egobody Scene Mesh
+* Please download this [google drive link](https://drive.google.com/drive/folders/1vJg3GFVPT6kr6cA0HrQGmiAEBE2dkaps?usp=drive_link) containing model checkpoints and necessary data, extract and merge it to the project folder.
+
 
 ## Visualization 
 
