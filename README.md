@@ -133,12 +133,12 @@ We provide a script to generate the scene with floor mesh. The input is z-up sce
 ```
 python generate_scene_with_floor.py
 ```
-## Scene mesh compressing
+## Scene Mesh Compressing
 If the original scene with floor mesh is too big, we provide a script that can effectively compress the scene mesh using quadratic decimation. For running the script, please use
 ```
 python compress_scene.py
 ```
-## Calculate scene sdf
+## Calculate Scene SDF
 We provide a script (adapted from the original dart) that can compute the scene sdf for the previous compressed scene with floor. For running the script, please use
 ```
 python generate_sdf.py
