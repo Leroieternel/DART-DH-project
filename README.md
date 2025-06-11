@@ -191,7 +191,7 @@ You may also tune the optimization parameters to modulate the generation, such a
 # Evaluation Metrices
 The losses are automatically printed out after all the optimization steps are finished. By the end of the output, all the quantitative metrics will be shown in the terminal.
 
-![Demo Image](images/demo.png)
+![Demo Image](images/output.jpg)
 
 
 [//]: # (## Sparse and Dense Joint locations Control)
