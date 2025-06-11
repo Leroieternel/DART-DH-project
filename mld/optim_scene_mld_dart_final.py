@@ -440,11 +440,10 @@ def optimize(history_motion_tensor, transf_rotmat, transf_transl, text_prompt, g
                                gender='neutral', use_pca=True, num_pca_comps=12, num_betas=10, batch_size=1).to(device)
             scene_assets['model'] = attach_volume(model, pretrained=True, device=device)
          
-        # 使用scene sdf计算实际的loss_collision
         joints_sdf = calc_point_sdf(scene_assets, global_joints.reshape(1, -1, 3)).reshape(B, T, 22)
         negative_sdf_per_frame = (joints_sdf - joint_skin_dist.reshape(1, 1, 22)).clamp(max=0).sum(dim=-1)  # [B, T]
         negative_sdf_mean = negative_sdf_per_frame.mean()
-        loss_collision = -negative_sdf_mean  # 这是实际使用的loss
+        loss_collision = -negative_sdf_mean  
          
         for frame_idx in frame_indices:
             if frame_idx >= T:
