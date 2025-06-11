@@ -44,8 +44,6 @@ from pytorch3d.transforms import matrix_to_axis_angle
 debug = 0
 
 NUM_POINTS_SAMPLE_FOR_VOLSMPL = 3000  
-
-# 添加新的配置参数
 COLLISION_DETECTION_RADIUS = 2.5 
 FRAME_SKIP_INTERVAL = 2  
 
@@ -156,7 +154,7 @@ def generate_per_frame_ball_surface(ball_traj: torch.Tensor, radius: float, num_
     # unit_sphere = torch.tensor(unit_sphere_np, dtype=torch.float32, device=ball_traj.device)  # [N, 3]
     unit_sphere = torch.from_numpy(unit_sphere_np).to(ball_traj.device).float()
 
-    # Expand + transform: 每一帧复制 unit_sphere，然后乘半径并平移中心
+    # Expand + transform: duplicate unit_sphere for each frame，* radius + translation
     ball_surface = unit_sphere.unsqueeze(0).repeat(T, 1, 1) * radius + ball_traj[:, None, :]  # [T, N, 3]
     return ball_surface
 
