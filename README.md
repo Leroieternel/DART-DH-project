@@ -178,10 +178,6 @@ python -m mld.optim_scene_mld_ball_dart --denoiser_checkpoint './mld_denoiser/ml
 
 The respective python files, used for improving upon DART's original optimizer can be found in the folder `mld` as the files `optim_scene_mld.py`, `optim_scene_mld_dart_final.py` and `optim_scene_mld_volsmpl_ball.py`, where `optim_scene_mld.py` is our VolumetricSMPL-based collision loss implementation. Our config .json files are at `./data/optim_interaction`.
 
-The losses are automatically printed out after all the optimization steps are finished. By the end of the output, all the quantitative metrics will be shown in the terminal.
-
-![Demo Image](images/demo.png)
-
 
 To use a custom 3D scene, you need to first calculate the scene SDF for evaluating human-scene collision and contact constraints.
 Please ensure the 3D scene is z-up and the floor plane has zero height.
@@ -191,6 +187,11 @@ Please consult section **`Scene Mesh Pre-processing`** for more details.
 Example configuration files for an interaction sequence can be found [here](./data/optim_interaction). We currently initialize the human using a standing pose, with its location and orientation determined by the pelvis, left hip and right hip location specified using `init_joints`.
 The goal joint locations are specified using `goal_joints`. The current [script](./mld/optim_scene_mld.py) only use pelvis as the goal joint, you can modify the goal joints to be another joint or multiple joints.
 You may also tune the optimization parameters to modulate the generation, such as increasing the learning rate to obtain more diverse results, adjusting number of optimization steps to balance quality and speed, and adjusting the loss weights. 
+
+# Evaluation Metrices
+The losses are automatically printed out after all the optimization steps are finished. By the end of the output, all the quantitative metrics will be shown in the terminal.
+
+![Demo Image](images/demo.png)
 
 
 [//]: # (## Sparse and Dense Joint locations Control)
