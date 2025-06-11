@@ -190,7 +190,7 @@ The goal joint locations are specified using `goal_joints`. The current [script]
 You may also tune the optimization parameters to modulate the generation, such as increasing the learning rate to obtain more diverse results, adjusting number of optimization steps to balance quality and speed, and adjusting the loss weights. 
 
 # Evaluation Metrices
-The losses are automatically printed out after all the optimization steps are finished. By the end of the output, all the quantitative metrics will be shown in the terminal.
+The losses are automatically printed out after all the optimization steps are finished. By the end of the output, all the quantitative metrics will be shown in the terminal. A sample output should look like this:
 
 ![Demo Image](images/output.jpg)
 
