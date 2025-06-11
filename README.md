@@ -176,7 +176,7 @@ Our ball interaction optimizer can be run with
 python -m mld.optim_scene_mld_ball_dart --denoiser_checkpoint './mld_denoiser/mld_fps_clip_repeat_euler/checkpoint_300000.pt' --interaction_cfg "data/optim_interaction/bouncing_ball_navigation.json" --optim_lr 0.01 --optim_steps 100 --batch_size 1 --guidance_param 5 --respacing "ddim10" --export_smpl 1  --use_predicted_joints 1  --optim_unit_grad 1  --optim_anneal_lr 1  --weight_jerk 0.1 --weight_collision 0.1  --weight_contact 0.1  --weight_skate 0.0  --contact_thresh 0.00  --load_cache 0  --init_noise_scale 0.1
 ```
 
-The respective python files, used for improving upon DART's original optimizer can be found in the folder `mld` as the files `optim_scene_mld.py`, `optim_scene_mld_ball_dart.py`, `optim_scene_mld_dart_final.py` and `optim_scene_mld_volsmpl_ball.py`, where `optim_scene_mld.py` is our VolumetricSMPL-based collision loss implementation.
+The respective python files, used for improving upon DART's original optimizer can be found in the folder `mld` as the files `optim_scene_mld.py`, `optim_scene_mld_ball_dart.py`, `optim_scene_mld_dart_final.py` and `optim_scene_mld_volsmpl_ball.py`, where `optim_scene_mld.py` is our VolumetricSMPL-based collision loss implementation. Our config .json files are at `./data/optim_interaction`.
 
 To use a custom 3D scene, you need to first calculate the scene SDF for evaluating human-scene collision and contact constraints.
 Please ensure the 3D scene is z-up and the floor plane has zero height.
@@ -194,7 +194,7 @@ You may also tune the optimization parameters to modulate the generation, such a
 # Acknowledgements
 Our code is built upon many prior projects, including but not limited to:
 
-[DNO](https://github.com/korrawe/Diffusion-Noise-Optimization), [MDM](https://github.com/GuyTevet/motion-diffusion-model), [MLD](https://github.com/ChenFengYe/motion-latent-diffusion), [FlowMDM](https://github.com/BarqueroGerman/FlowMDM), [text-to-motion](https://github.com/EricGuo5513/text-to-motion), [guided-diffusion](https://github.com/openai/guided-diffusion), [ACTOR](https://github.com/Mathux/ACTOR), [DIMOS](https://github.com/zkf1997/DIMOS), [DART](https://github.com/zkf1997/DART)
+[DART](https://github.com/zkf1997/DART), [VolumetricSMPL](https://github.com/markomih/VolumetricSMPL)
 
 [//]: # (# License)
 
