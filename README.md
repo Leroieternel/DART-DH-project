@@ -3,6 +3,7 @@
 
 ### [[Project Website](https://voldart-dh.github.io/)]
 
+![Teaser Figure](images/foodlab_comparison.jpg)
 
 # Getting Started
 
